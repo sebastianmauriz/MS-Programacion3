@@ -1,0 +1,5 @@
+package com.programacionutn.microservicios.app.usuarios.client;
+
+public interface CursoFeignClient {
+
+}
