@@ -1,9 +1,16 @@
 package com.programacionutn.microservicios.app.respuestas;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+//esta etiqueta se pone porque respuestas tiene mongo, pero este MS en su pom tiene el commons alumnos y el
+//common examenes que si tiene el dataJPA de sql, sin esta etiqueta daría error. Se excluye de la autoconfiguracion
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
 /*esto que sigue es muy improtante para que Spring sepa donde se encuentran las clases entity del microservicio

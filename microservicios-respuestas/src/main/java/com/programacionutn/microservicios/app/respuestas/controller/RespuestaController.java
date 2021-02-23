@@ -23,8 +23,10 @@ public class RespuestaController {
 	
 	@PostMapping //si no ponemos ruta quiere decir que lo dejamos en la raiz
 	public ResponseEntity<?> crear(@RequestBody Iterable<Respuesta> respuestas){
+		//recordar que la respuesta ya viene con el objeto pregunta y con el alumno
 		respuestas= ((List<Respuesta>)respuestas).stream().map(r->{
 			r.setAlumnoId(r.getAlumno().getId());
+			r.setPreguntaId(r.getPregunta().getId());
 			return r;
 		}).collect(Collectors.toList());
 		

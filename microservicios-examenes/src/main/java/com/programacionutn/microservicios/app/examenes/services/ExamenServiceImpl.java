@@ -37,6 +37,13 @@ public class ExamenServiceImpl extends CommonServiceImpl<Examenes, ExamenReposit
 		//de hacer la lista del tipo List lo hacemos del tipo Iterable, es lo mismo
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Long> findExamenesIdsConRespuestasByPreguntaIds(Iterable<Long> preguntaIds) {
+		
+		return repository.findExamenesIdsConRespuestasByPreguntaIds(preguntaIds);
+	}
+
 	
 	
 }

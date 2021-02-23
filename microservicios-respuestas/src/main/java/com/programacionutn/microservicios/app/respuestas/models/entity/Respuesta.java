@@ -3,7 +3,6 @@ package com.programacionutn.microservicios.app.respuestas.models.entity;
 
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.programacionutn.microservicios.commons.alumnos.models.entity.Alumno;
@@ -26,14 +25,14 @@ public class Respuesta {
 	
 	//@ManyToOne(fetch = FetchType.LAZY)  //se comenta porque esta tabla con esta mas en la misma ddbb
 	//@Transient
-	@Transient
+	//@Transient  //se comenta pórque ahora este atributo y el de pregunta serán locales a mongo
 	private Alumno alumno;
 	
 	//@Column(name = "alumno_id")
 	private Long alumnoId;  //sera parte del json de mongo
 	
 	//@OneToOne(fetch = FetchType.LAZY)
-	@Transient
+	//@Transient
 	private Pregunta pregunta;
 
 	private Long preguntaId;  //es parte del Json de mongo

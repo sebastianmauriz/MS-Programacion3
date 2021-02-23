@@ -16,10 +16,9 @@ public interface RespuestaFeignClients {
 	
 	//el  GetMapping indicamos el endpoint con una variable{alumnoId} por eso en el metodo
 	//desspues debemos indicar de que tipo y cual es esa variable con la anotacion @PathVariable 
-	@GetMapping("/alumno/{alumnoId}/examenes-respondidos")	
+	@GetMapping("/alumno/{alumnoId}/examenes-respondidos")
+	
 	public Iterable <Long> obtenerExamenesIdsConRespuestasAlumno(@PathVariable Long alumnoId);
-			
-			
-			
+						
 			
 	}
