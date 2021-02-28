@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.programacionutn.microservicios.app.examenes.services.ExamenService;
 import com.programacionutn.microservicios.commons.controllers.CommonController;
-import com.programacionutn.microservicios.commons.examenes.models.entity.Examenes;
+import com.programacionutn.microservicios.commons.examenes.models.entity.Examen;
 import com.programacionutn.microservicios.commons.examenes.models.entity.Pregunta;
 
 @RestController
-public class ExamenController extends CommonController<Examenes, ExamenService> {
+public class ExamenController extends CommonController<Examen, ExamenService> {
 
 	@GetMapping("/respondidos-por-preguntas")
 	public ResponseEntity<?> obtenerExamenesIdsPorPreguntasIdRespondidas(@RequestParam List<Long> preguntaIds){
@@ -30,17 +30,17 @@ public class ExamenController extends CommonController<Examenes, ExamenService> 
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> editar(@Valid @RequestBody Examenes examen, BindingResult result, @PathVariable Long id){
+	public ResponseEntity<?> editar(@Valid @RequestBody Examen examen, BindingResult result, @PathVariable Long id){
 		
 		if(result.hasErrors()) {
 			return this.validar(result);
 		}
-		Optional<Examenes> exam = service.findById(id);
+		Optional<Examen> exam = service.findById(id);
 		
 		if(!exam.isPresent()) {
 			return ResponseEntity.notFound().build(); //si no esta el examen retornamos un error 404
 		}
-		 Examenes examenDb =exam.get(); //a una variable nueva le asignamos el examen encontrado mas arriba con el id
+		 Examen examenDb =exam.get(); //a una variable nueva le asignamos el examen encontrado mas arriba con el id
 		examenDb.setNombre(examen.getNombre());//a esta nueva variable le seteamos el nombre del examen que pasamos por parametro
 		 
 		//ahora lo que hacemos es verificar que las preguntas enviadas en el examen están o no, es decir,

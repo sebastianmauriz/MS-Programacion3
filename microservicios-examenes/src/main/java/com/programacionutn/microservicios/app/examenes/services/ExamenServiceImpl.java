@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.programacionutn.microservicios.app.examenes.models.repository.AsignaturaRepository;
 import com.programacionutn.microservicios.app.examenes.models.repository.ExamenRepository;
 import com.programacionutn.microservicios.commons.examenes.models.entity.Asignatura;
-import com.programacionutn.microservicios.commons.examenes.models.entity.Examenes;
+import com.programacionutn.microservicios.commons.examenes.models.entity.Examen;
 import com.programacionutn.microservicios.commons.services.CommonServiceImpl;
 
 @Service
-public class ExamenServiceImpl extends CommonServiceImpl<Examenes, ExamenRepository> implements ExamenService {
+public class ExamenServiceImpl extends CommonServiceImpl<Examen, ExamenRepository> implements ExamenService {
 
 	@Autowired
 	private AsignaturaRepository asignaturaRepository; //creamos este atributo para poder acceder al repositorio
@@ -23,7 +23,7 @@ public class ExamenServiceImpl extends CommonServiceImpl<Examenes, ExamenReposit
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Examenes> findByNombre(String termino) {
+	public List<Examen> findByNombre(String termino) {
 		
 		return repository.findByNombre(termino);
 	}

@@ -1,5 +1,0 @@
-package com.programacionutn.microservicios.app.cursos.models.entity;
-
-public class CursoAlumno {
-
-}

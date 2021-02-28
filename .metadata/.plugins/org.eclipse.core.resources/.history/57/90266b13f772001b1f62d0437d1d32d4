@@ -1,5 +1,0 @@
-package com.programacionutn.microservicios.app.cursos.clients;
-
-public interface AlumnoFeignCliente {
-
-}

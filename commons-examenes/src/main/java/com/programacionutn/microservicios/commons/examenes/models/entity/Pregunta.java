@@ -25,7 +25,7 @@ public class Pregunta {
 	@JsonIgnoreProperties(value = {"preguntas"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "examen_id")//esta seria la clave foranea
-	private Examenes examen;
+	private Examen examen;
 
 	public Long getId() {
 		return id;
@@ -43,11 +43,11 @@ public class Pregunta {
 		this.texto = texto;
 	}
 
-	public Examenes getExamen() {
+	public Examen getExamen() {
 		return examen;
 	}
 
-	public void setExamen(Examenes examen) {
+	public void setExamen(Examen examen) {
 		this.examen = examen;
 	}
 

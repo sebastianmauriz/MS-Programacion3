@@ -1,0 +1,40 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-dark my-2" routerLink="/alumnos">Volver</button>
+        <form >
+            <div class=" form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre" 
+                [(ngModel)]= "alumno.nombre">
+                <div class="alert alert-danger" *ngIf="error?.nombre">
+                    <!-- error?.nombre es lo mismo que error && error.nombre -->
+                    {{error.nombre}}
+                </div>
+              
+            </div>
+            <div class=" form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" class="form-control" id="apellido"                 
+                [(ngModel)]= "alumno.apellido">
+                <!-- id="apellido"  esto es para que al hacer click en el label, se marca ya el input -->
+                <div class="alert alert-danger" *ngIf="error && error.apellido">
+                    {{error.apellido}}
+                </div>
+            </div>
+            <div class=" form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" id="email" 
+                [(ngModel)]= "alumno.email">
+                <div class="alert alert-danger" *ngIf="error && error.email">
+                    {{error.email}}
+                </div>
+            </div>
+            <div class=" form-group">
+                <button type="button" class="btn btn-primary" 
+                (click)="alumno.id? editar(): crear()">{{alumno.id? 'Editar': 'Crear'}}</button>
+                <!-- alumno.id? editar(): crear(),,, esto significa que si existe el id se invoca el metodo editar y los : simulan un else -->
+            </div>
+        </form>
+    </div>
+</div>

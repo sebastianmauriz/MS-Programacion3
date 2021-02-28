@@ -26,7 +26,7 @@ import com.programacionutn.microservicios.app.cursos.models.entity.CursoAlumno;
 import com.programacionutn.microservicios.app.cursos.services.CursoService;
 import com.programacionutn.microservicios.commons.alumnos.models.entity.Alumno;
 import com.programacionutn.microservicios.commons.controllers.CommonController;
-import com.programacionutn.microservicios.commons.examenes.models.entity.Examenes;
+import com.programacionutn.microservicios.commons.examenes.models.entity.Examen;
 
 @RestController
 public class CursoController extends CommonController<Curso, CursoService> {
@@ -166,7 +166,7 @@ public class CursoController extends CommonController<Curso, CursoService> {
 		if (curso != null) {
 			List<Long> examenesIds = (List<Long>) service.obtenerExamenesIdsConRespuestasAlumno(id);
 			if (examenesIds != null && examenesIds.size() > 0) {
-				List<Examenes> examenes = curso.getExamenes().stream().map(examen -> {
+				List<Examen> examenes = curso.getExamenes().stream().map(examen -> {
 					if (examenesIds.contains(examen.getId())) {
 						examen.setRespondido(true);
 					}
@@ -180,7 +180,7 @@ public class CursoController extends CommonController<Curso, CursoService> {
 
 	// metodo para asiganr examenes, es igual al de asignar alumnos
 	@PutMapping("/{id}/asignar-examenes")
-	public ResponseEntity<?> asignarExamenes(@RequestBody List<Examenes> examenes, @PathVariable Long id) {
+	public ResponseEntity<?> asignarExamenes(@RequestBody List<Examen> examenes, @PathVariable Long id) {
 		// ahora con el id tenemos que buscar el curso al cual agregaremos a los alumnos
 		Optional<Curso> opcional = this.service.findById(id);
 		if (!opcional.isPresent()) {
@@ -194,7 +194,7 @@ public class CursoController extends CommonController<Curso, CursoService> {
 	}
 
 	@PutMapping("/{id}/eliminar-examen")
-	public ResponseEntity<?> eliminarExamen(@RequestBody Examenes examen, @PathVariable Long id) {
+	public ResponseEntity<?> eliminarExamen(@RequestBody Examen examen, @PathVariable Long id) {
 		// ahora con el id tenemos que buscar el curso al cual agregaremos a los alumnos
 		Optional<Curso> opcional = this.service.findById(id);
 		if (!opcional.isPresent()) {

@@ -22,7 +22,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.programacionutn.microservicios.commons.alumnos.models.entity.Alumno;
-import com.programacionutn.microservicios.commons.examenes.models.entity.Examenes;
+import com.programacionutn.microservicios.commons.examenes.models.entity.Examen;
 
 
 
@@ -64,7 +64,7 @@ public class Curso {
    
 	
 	@ManyToMany(fetch = FetchType.LAZY)//muestra el objeto a demanda
-	private List<Examenes> examenes;
+	private List<Examen> examenes;
 	
 	@PrePersist
 	public void prePersist() {
@@ -128,20 +128,20 @@ public class Curso {
 
 
 
-	public List<Examenes> getExamenes() {
+	public List<Examen> getExamenes() {
 		return examenes;
 	}
 
 
 
-	public void setExamenes(List<Examenes> examenes) {
+	public void setExamenes(List<Examen> examenes) {
 		this.examenes = examenes;
 	}
 	
-	public void addExamen(Examenes examen) {
+	public void addExamen(Examen examen) {
 		this.examenes.add(examen);
 	}
-	public void removeExamen(Examenes examen) {
+	public void removeExamen(Examen examen) {
 		this.examenes.remove(examen);
 	}
 
