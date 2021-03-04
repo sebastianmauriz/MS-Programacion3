@@ -70,6 +70,8 @@ public class ExamenController extends CommonController<Examen, ExamenService> {
 		//una vez eliminadas las preguntas que no estan, debemos setear las que si estan en el Json que nos 
 		//envian en la variable examen
 		examenDb.setPreguntas(examen.getPreguntas());
+		examenDb.setAsignaturaHija(examen.getAsignaturaHija());
+		examenDb.setAsignaturaPadre(examen.getAsignaturaPadre());
 		//despues retornamos en ResponseEntity con el status de creado y en el body pasamos el examen con
 		//las preguntas ya guardado
 		

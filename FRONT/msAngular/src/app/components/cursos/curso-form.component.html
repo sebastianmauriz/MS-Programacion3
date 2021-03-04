@@ -1,0 +1,24 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-dark my-2" routerLink="/cursos">Volver</button>
+        <form>
+            <div class=" form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre" [(ngModel)]="model.nombre">
+                <div class="alert alert-danger" *ngIf="error?.nombre">
+                    <!-- error?.nombre es lo mismo que error && error.nombre -->
+                    {{error.nombre}}
+                </div>
+            </div>
+                    
+            <div class=" form-group">
+                <button type="button" class="btn btn-primary" (click)="model.id? editar(): crear()">{{model.id?
+                    'Editar': 'Crear'}}</button>
+                <!-- alumno.id? editar(): crear(),,, esto significa que si existe el id se invoca el metodo editar y los : simulan un else -->
+            </div>
+
+        </form>
+    </div>
+</div>
+

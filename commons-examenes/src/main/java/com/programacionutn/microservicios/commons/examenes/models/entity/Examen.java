@@ -46,9 +46,15 @@ public class Examen {
 	//cualquier pregunta que no este relacionada a un examen al ser removido, sera null y se eliminara, queda huerfano, es por eso que se elimina
 	private List<Pregunta>preguntas;
 	
+	@JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
-	private Asignatura asignatura;
+	private Asignatura asignaturaPadre;
+	
+	@JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
+	@ManyToOne(fetch = FetchType.LAZY)
+	@NotNull
+	private Asignatura asignaturaHija;
 	
 	//esta annotation lo que hace es que no lo mapea a la tabla al atributo, es decir no crea el campo
 	//Lo hacemos asi porque sino pondria true o false a todos los examenes de todos los alumnos, y por ahí hay
@@ -115,17 +121,27 @@ public class Examen {
 	//se implementa el metodo equals para poder eliminar un examen, este metodo lo que hace es
 	//comprobar que exista o no ese elemento a eliminar. Se hace aca la funcion ya que esta es una clase padre
 	
-	public Asignatura getAsignatura() {
-		return asignatura;
-	}
-
-	public void setAsignatura(Asignatura asignatura) {
-		this.asignatura = asignatura;
-	}
+	
 	
 	
 	public boolean isRespondido() {
 		return respondido;
+	}
+
+	public Asignatura getAsignaturaPadre() {
+		return asignaturaPadre;
+	}
+
+	public void setAsignaturaPadre(Asignatura asignaturaPadre) {
+		this.asignaturaPadre = asignaturaPadre;
+	}
+
+	public Asignatura getAsignaturaHija() {
+		return asignaturaHija;
+	}
+
+	public void setAsignaturaHija(Asignatura asignaturaHija) {
+		this.asignaturaHija = asignaturaHija;
 	}
 
 	public void setRespondido(boolean respondido) {

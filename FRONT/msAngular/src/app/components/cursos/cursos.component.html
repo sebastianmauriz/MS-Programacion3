@@ -1,1 +1,59 @@
-<p>cursos works!</p>
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-primary my-3" routerLink="/cursos/form">Crear</button>
+        <div class="alert alert-info" *ngIf="lista.length ==0"> 
+            No hay cursos en el sistema
+        </div>
+        <!-- "table table-hover table-striped son diferentes estilos de boostsrap -->
+        <table class="table table-hover table-striped" *ngIf="lista.length >0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nombre</th>
+                    <th>alumnos</th>
+                    <th>examenes</th>
+                    <th>creado en</th> 
+                    <th>editar</th>
+                    <th>eliminar</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let curso of lista">
+                    <td>{{curso.id}}</td>                    
+                    <td>{{curso.nombre}}</td>
+                    <th><button class="btn btn-info btn-sm"
+                        [routerLink]="['/cursos/asignar-alumnos', curso.id]">
+                    Añadir ({{curso.alumnos.length}})</button></th>
+                    <th><button class="btn btn-info btn-sm"
+                        [routerLink]="['/cursos/asignar-examenes', curso.id]" >
+                        añadir ({{curso.examenes.length}})
+                    </button></th>
+                    <td>{{curso.creatAt | date:'yyyy/MM/dd'}}</td>
+                    <td><button class="btn btn-secondary btn-sm" 
+                        [routerLink]="['/cursos/form', curso.id]">
+                        Editar</button></td>
+                    <td><button class="btn btn-danger btn-sm" (click)="eliminar(curso)"
+                        >
+                        Eliminar</button></td>
+
+                </tr>
+
+            </tbody>
+
+
+        </table>
+
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2">
+              <!-- showFirstLastButtons: es para mostrar ir a la primera y a la ultima pagina -->
+            </mat-paginator>
+    </div>
+</div>

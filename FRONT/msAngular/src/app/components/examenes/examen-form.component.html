@@ -1,0 +1,76 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-dark my-2" routerLink="/examenes">Volver</button>
+        <form>
+            <div class=" form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre" [(ngModel)]="model.nombre">
+                <div class="alert alert-danger" *ngIf="error?.nombre">
+                    <!-- error?.nombre es lo mismo que error && error.nombre -->
+                    {{error.nombre}}
+                </div>
+            </div>
+
+            <!-- ahora hacemos la vista de la lista de asignaturas tanto padre como hija -->
+            <div calss="form-group">
+                <label for="asignaturaPadre">Asignatura</label>
+                <!-- [(ngModel)]= con esto mapeamos el html al atributo asignaturaPadre de la clase examen.ts -->
+                <select (change)="cargarHijos()" [compareWith]="compararAsignatura" [(ngModel)]="model.asignaturaPadre"
+                    class="form-control" name="asignaturaPadre" id="asignaturaPadre">
+                    <option [ngValue]="undefined">---Seleccionar una asignatura---</option>
+                    <option *ngFor="let asignatura of asignaturasPadre" [ngValue]="asignatura">
+                        {{asignatura.nombre}}
+                    </option>
+                </select>
+                <div class="alert alert-danger" *ngIf="error?.asignaturaPadre">
+                    {{error.asignaturaPadre}}
+                </div>
+            </div>
+
+            <div calss="form-group">
+                <label for="asignaturaHija">Asignatura Hija</label>
+                <!-- [(ngModel)]= con esto mapeamos el html al atributo asignaturaPadre de la clase examen.ts -->
+                <select [compareWith]="compararAsignatura" [(ngModel)]="model.asignaturaHija" class="form-control"
+                    name="asignaturaHija" id="asignaturaHija">
+                    <option [ngValue]="undefined">---Seleccionar una asignatura---</option>
+                    <option *ngFor="let asignatura of asignaturasHija" [ngValue]="asignatura">
+                        {{asignatura.nombre}}
+                    </option>
+                </select>
+                <div class="alert alert-danger" *ngIf="error?.asignaturaHija">
+                    {{error.asignaturaHija}}
+                </div>
+            </div>
+            <button (click)="agregarPregunta()" class=" btn btn-light btn-lg my-3">
+                Agregar Pregunta
+            </button>
+
+            <div class="form-group" *ngFor="let pregunta of model.preguntas; let i = index">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Pregunta {{i+1}}:</label>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{pregunta.texto}}" class="form-control"
+                            (change)="asignarTexto(pregunta, $event)">
+                    </div>
+                    <div class="col-sm-1">
+                        <button class="btn btn-danger btn-sm"
+                        (click)="eliminarPregunta(pregunta)">X</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=" form-group">
+                <button type="button" class="btn btn-primary" (click)="model.id? editar(): crear()">{{model.id?
+                    'Editar': 'Crear'}}</button>
+                <!-- alumno.id? editar(): crear(),,, esto significa que si existe el id se invoca el metodo editar y los : simulan un else -->
+            </div>
+
+        </form>
+    </div>
+</div>

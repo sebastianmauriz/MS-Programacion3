@@ -1,0 +1,113 @@
+<!--- Esto lo saque de angular material en table -->
+<!-- cada <ng-container> representa una celda para el nombre, apellido, email -->
+<!-- th es la columna y td es la celda o fila -->
+<!-- el keyup sirve para que a medida que escribimos va buscando ese objeto y e le pasa un
+event para obtener el valor de loq eu vamos escribiendo-->
+
+<mat-card>
+  <!-- ponemos el ngIf curso porque la plantilla se carga mas rapido de lo que tarda en ir
+a buscar el curso al back, por eso si el curso ya está, recien ahi carga la plantilla -->
+  <mat-card-header *ngIf="curso">
+    <mat-card-title>
+      Alumnos del curso {{curso.nombre}}
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-tab-group animationDuration="2000ms" dynamicHeight [(selectedIndex)]="tabIndex">
+      <mat-tab label="Asignar Alumnos">
+        <mat-form-field class="mx-3" style="width:50%;">
+          <input matInput placeholder="Buscar Alumnos" (keyup)="filtrar($any($event.target).value)">
+        </mat-form-field>
+        <table mat-table [dataSource]="alumnosAsignar" class="mat-elevation-z8 mx-3" style="width: 75%;">
+          <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
+  que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
+          <ng-container matColumnDef="seleccion">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event? seleccionarDesSeleccionarTodos(): null"
+                [checked]="seleccion.hasValue() && estanTodosSeleccionados()"
+                [indeterminate]="seleccion.hasValue() && !estanTodosSeleccionados()">
+                <!-- si existe el objeto evento se hace la seleccion, de lo contrario no hace nada (null) -->
+
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let alumno">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event? seleccion.toggle(alumno): null"
+                [checked]="seleccion.isSelected(alumno)">
+
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef> Apellido </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.apellido}} </td>
+          </ng-container>
+
+          <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
+          <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+          <!-- y aca ponemos que vamos a mostrar en las celdas  -->
+          <tr mat-row *matRowDef="let alumno; columns: mostrarColumnas;" (click)="seleccion.toggle(alumno)"></tr>
+        </table>
+
+        <button mat-raised-button color="primary" class="m-4" (click)="asignar()"
+          [disabled]="!seleccion.hasValue()">Asignar</button>
+
+      </mat-tab>
+
+
+      <mat-tab label="Alumnos">  
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3" style="width: 75%;">
+          <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
+  que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
+         
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
+          </ng-container>        
+
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef> Apellido </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.apellido}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let alumno"> {{alumno.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+            <td mat-cell *matCellDef="let alumno"> 
+              <button mat-flat-button color="warn"
+              (click)="eliminarAlumno(alumno)">X</button> 
+            </td>
+          </ng-container> 
+
+          <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
+          <tr mat-header-row *matHeaderRowDef="mostrarColumnasAlumnos"></tr>
+          <!-- y aca ponemos que vamos a mostrar en las celdas  -->
+          <tr mat-row *matRowDef="let alumno; columns: mostrarColumnasAlumnos;"></tr>
+        </table>   
+
+        <mat-paginator  
+        [pageSizeOptions]="pageSizeOptions"
+        showFirstLastButtons
+        class="float-left mx-2">
+        <!-- showFirstLastButtons: es para mostrar ir a la primera y a la ultima pagina -->
+      </mat-paginator>
+      </mat-tab>
+    </mat-tab-group>
+ c

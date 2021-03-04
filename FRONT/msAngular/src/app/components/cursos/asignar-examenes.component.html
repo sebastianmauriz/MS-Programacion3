@@ -1,0 +1,48 @@
+<mat-card>
+    <!-- ponemos el ngIf curso porque la plantilla se carga mas rapido de lo que tarda en ir
+  a buscar el curso al back, por eso si el curso ya está, recien ahi carga la plantilla -->
+    <mat-card-header *ngIf="curso">
+        <mat-card-title>
+            Exámenes del curso {{examen.nombre}}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+
+        <mat-form-field>
+            <input matInput placeholder="Añadir examen" [formControl]="autoCompleteControl"
+                [matAutocomplete]="autocomplete">
+            <!-- #autocomplete="matAutocomplete">: con esta instruccion y este objeto (propio del mat autocomplete)
+    enlazamos el imput con el autocomplete, el [displayWith] sirve para mostrar algo, lo que querramos -->
+            <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="mostrarNombre"
+                (optionSelected)="seleccionaExamen($event)">
+                <mat-option *ngFor="let examenFiltrado of examenesFiltrados" [value]="examenFiltrado">
+                    {{examenFiltrado.nombre}}
+
+                </mat-option>
+
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="examenesAsignar" class="mat-elevation-z8 mx-3" style="width: 75%;">
+            <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
+que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
+           
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="asignatura">
+                <th mat-header-cell *matHeaderCellDef> Asignatura </th>
+                <td mat-cell *matCellDef="let examen"> {{examen.asignaturaHija.nombre}} </td>
+            </ng-container>
+
+            <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
+            <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+            <!-- y aca ponemos que vamos a mostrar en las celdas  -->
+            <tr mat-row *matRowDef="let examen; columns: mostrarColumnas;" (></tr>
+        </table>
+    </mat-card-content>
+</mat-card>

@@ -1,5 +1,0 @@
-package com.programacionutn.microservicios.app.respuestas.clients;
-
-public interface ExamenFeignClient {
-
-}

@@ -28,7 +28,8 @@ public class Asignatura {
 	
 	private String nombre;
 	
-	@JsonIgnoreProperties(value = {"hijos"})
+	@JsonIgnoreProperties(value = {"hijos", "handler", "hibernateLazyInitializer"})//"handler", "hibernateLazyInitializer"}) esto es para que no
+	//de error el proxy que suele hacerlo
 	//muchas asignaturas hijas asociadas a un padre
 	@ManyToOne
 	private Asignatura padre;
@@ -37,7 +38,7 @@ public class Asignatura {
 	//una lista de asignaturas hijos que son mappeadas por el padre. Ademas de nada sirve tener un elemento
 	//hijo si se borra al padre, para eso usamos el cascade = CascadeType.ALL
 	
-	@JsonIgnoreProperties(value = {"padre"},allowSetters = true)
+	@JsonIgnoreProperties(value = {"padre", "handler", "hibernateLazyInitializer"},allowSetters = true)
 	//Esto es para limitar las relaciones en cascada que se llaman una y otra vez en forma infinita, produciendo
 	//que el Json se rompa y largando una excepcion		
 	//en value se hace un arreglo y se ponen los atributos que vamos a omitir de ignorar, en el caso de los

@@ -2,14 +2,15 @@
     <div class="card-header">{{titulo}}</div>
     <div class="card-body">
         <button class="btn btn-primary my-3" routerLink="/alumnos/form">Crear</button>
-        <div class="alert alert-info" *ngIf="alumnos.length ==0"> 
+        <div class="alert alert-info" *ngIf="lista.length ==0"> 
             No hay alumnos en el sistema
         </div>
         <!-- "table table-hover table-striped son diferentes estilos de boostsrap -->
-        <table class="table table-hover table-striped" *ngIf="alumnos.length >0">
+        <table class="table table-hover table-striped" *ngIf="lista.length >0">
             <thead>
                 <tr>
                     <th>id</th>
+                    <th>foto</th>
                     <th>nombre</th>
                     <th>apellido</th>
                     <th>email</th>
@@ -20,8 +21,21 @@
 
             </thead>
             <tbody>
-                <tr *ngFor="let alumno of alumnos">
+                <tr *ngFor="let alumno of lista">
                     <td>{{alumno.id}}</td>
+                    <td>
+                         <!-- '?fotoHashCode=' + alumno.fotoHashCode"    con esto hacemos la ruta de 
+                            la foto que sea variable para poder editar foto y que se vea reflejada -->
+                        <img *ngIf="alumno.fotoHashCode" 
+                        [src]="baseEndpoint + '/uploads/img/' + alumno.id + '?fotoHashCode=' + alumno.fotoHashCode" 
+                        class="img-thumbnail rounded"
+                        style="width: 64px; cursor:pointer;">
+
+                        <img *ngIf="!alumno.fotoHashCode" 
+                        [src]="'/assets/images/no-usuario.png'" 
+                        class="img-thumbnail rounded"
+                        style="width: 64px; cursor:pointer;">
+                    </td>
                     <td>{{alumno.nombre}}</td>
                     <td>{{alumno.apellido}}</td>
                     <td>{{alumno.email}}</td>
@@ -45,7 +59,10 @@
               [pageSize]="totalPorPagina"
               [pageIndex]="paginaActual"
               [pageSizeOptions]="pageSizeOptions"
-              (page)="paginar($event)">
+              (page)="paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2">
+              <!-- showFirstLastButtons: es para mostrar ir a la primera y a la ultima pagina -->
             </mat-paginator>
     </div>
 </div>

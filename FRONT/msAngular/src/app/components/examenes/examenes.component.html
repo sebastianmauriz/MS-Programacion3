@@ -1,1 +1,55 @@
-<p>examenes works!</p>
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button class="btn btn-primary my-3" routerLink="/examenes/form">Crear</button>
+        <div class="alert alert-info" *ngIf="lista.length ==0"> 
+            No hay examenes en el sistema
+        </div>
+        <!-- "table table-hover table-striped son diferentes estilos de boostsrap -->
+        <table class="table table-hover table-striped" *ngIf="lista.length >0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nombre</th>
+                    <th>asignaturas</th>
+                    <th>preguntas</th>
+                    <th>creado en</th> 
+                    <th>editar</th>
+                    <th>eliminar</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let examen of lista">
+                    <td>{{examen.id}}</td>                    
+                    <td>{{examen.nombre}}</td>
+                    <td>{{examen.asignaturaPadre.nombre}} -> {{examen.asignaturaHija.nombre}}</td>
+                    <td>{{examen.preguntas.length}}</td>
+                    <td>{{examen.createAt | date:'yyyy/MM/dd'}}</td>
+                    <td><button class="btn btn-secondary btn-sm" 
+                        [routerLink]="['/examenes/form', examen.id]">
+                        Editar</button></td>
+                    <td><button class="btn btn-danger btn-sm" (click)="eliminar(examen)"
+                        >
+                        Eliminar</button></td>
+
+                </tr>
+
+            </tbody>
+
+
+        </table>
+
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2">
+              <!-- showFirstLastButtons: es para mostrar ir a la primera y a la ultima pagina -->
+            </mat-paginator>
+    </div>
+</div>
+
