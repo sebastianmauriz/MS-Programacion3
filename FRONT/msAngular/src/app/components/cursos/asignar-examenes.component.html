@@ -3,46 +3,100 @@
   a buscar el curso al back, por eso si el curso ya está, recien ahi carga la plantilla -->
     <mat-card-header *ngIf="curso">
         <mat-card-title>
-            Exámenes del curso {{examen.nombre}}
+            Examenes del curso {{curso.nombre}}
         </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
+        <mat-tab-group animationDuration="2000ms" dynamicHeight [(selectedIndex)]="tabIndex">
+            <mat-tab label="Asignar Examenes">
 
-
-        <mat-form-field>
-            <input matInput placeholder="Añadir examen" [formControl]="autoCompleteControl"
-                [matAutocomplete]="autocomplete">
-            <!-- #autocomplete="matAutocomplete">: con esta instruccion y este objeto (propio del mat autocomplete)
+                <mat-form-field>
+                    <input matInput placeholder="Añadir examen" [formControl]="autoCompleteControl"
+                        [matAutocomplete]="autocomplete">
+<!-- #autocomplete="matAutocomplete">: con esta instruccion y este objeto (propio del mat autocomplete)
     enlazamos el imput con el autocomplete, el [displayWith] sirve para mostrar algo, lo que querramos -->
-            <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="mostrarNombre"
-                (optionSelected)="seleccionaExamen($event)">
-                <mat-option *ngFor="let examenFiltrado of examenesFiltrados" [value]="examenFiltrado">
-                    {{examenFiltrado.nombre}}
+                    <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="mostrarNombre"
+                        (optionSelected)="seleccionarExamen($event)">
+                        <mat-option *ngFor="let examen of examenesFiltrados" [value]="examen">
+                            {{examen.nombre}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
 
-                </mat-option>
-
-            </mat-autocomplete>
-        </mat-form-field>
-
-        <table mat-table [dataSource]="examenesAsignar" class="mat-elevation-z8 mx-3" style="width: 75%;">
-            <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
+                <table mat-table [dataSource]="examenesAsignar" class="mat-elevation-z8 mx-3" style="width: 75%;">
+ <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
 que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
-           
-            <ng-container matColumnDef="nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
-            </ng-container>
 
-            <ng-container matColumnDef="asignatura">
-                <th mat-header-cell *matHeaderCellDef> Asignatura </th>
-                <td mat-cell *matCellDef="let examen"> {{examen.asignaturaHija.nombre}} </td>
-            </ng-container>
 
-            <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
-            <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
-            <!-- y aca ponemos que vamos a mostrar en las celdas  -->
-            <tr mat-row *matRowDef="let examen; columns: mostrarColumnas;" (></tr>
-        </table>
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                        <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="asignatura">
+                        <th mat-header-cell *matHeaderCellDef> Asignatura </th>
+                        <td mat-cell *matCellDef="let examen"> {{examen.asignaturaHija.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                        <td mat-cell *matCellDef="let examen">
+                            <button mat-flat-button color="warn"(click)="eliminarDelAsignar(examen)">
+                                eliminar
+                            </button>
+                        </td>
+                    </ng-container>
+
+                     <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
+                    <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+                      <!-- y aca ponemos que vamos a mostrar en las celdas  -->
+                    <tr mat-row *matRowDef="let examen; columns: mostrarColumnas;"></tr>
+                </table>
+                <button mat-raised-button color="primary" class="m-4" (click)="asignar()"
+                    [disabled]="examenesAsignar?.length === 0">Asignar</button>
+            </mat-tab>
+
+            <mat-tab label="Examenes del curso">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-3" style="width: 75%;">
+ <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
+    que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Id </th>
+                        <td mat-cell *matCellDef="let examen"> {{examen.id}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                        <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="asignaturas">
+                        <th mat-header-cell *matHeaderCellDef> Asignaturas </th>
+                        <td mat-cell *matCellDef="let examen"> {{examen.asignaturaPadre.nombre}} -->
+                            {{examen.asignaturaHija.nombre}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                        <td mat-cell *matCellDef="let examen"> 
+                            <button mat-flat-button color="warn"
+                            (click)="eliminarExamenDelCurso(examen)">Eliminar</button> </td>
+                    </ng-container>
+                    
+  <!-- aca ponemos que vamos a mostrar en el encabezado (nombre y apellido) -->
+                    <tr mat-header-row *matHeaderRowDef="mostrarColumnasExamenes"></tr>
+                    <!-- y aca ponemos que vamos a mostrar en las celdas  -->
+                    <tr mat-row *matRowDef="let examen; columns: mostrarColumnasExamenes;"></tr>
+                </table>
+                <mat-paginator 
+                [pageSizeOptions]="pageSizeOptions" 
+                showFirstLastButtons 
+                class="float-left mx-2">
+                </mat-paginator>
+            </mat-tab>
+
+        </mat-tab-group>
+
     </mat-card-content>
+
 </mat-card>

@@ -27,10 +27,12 @@
                     <th><button class="btn btn-info btn-sm"
                         [routerLink]="['/cursos/asignar-alumnos', curso.id]">
                     Añadir ({{curso.alumnos.length}})</button></th>
+
                     <th><button class="btn btn-info btn-sm"
                         [routerLink]="['/cursos/asignar-examenes', curso.id]" >
                         añadir ({{curso.examenes.length}})
                     </button></th>
+                    
                     <td>{{curso.creatAt | date:'yyyy/MM/dd'}}</td>
                     <td><button class="btn btn-secondary btn-sm" 
                         [routerLink]="['/cursos/form', curso.id]">

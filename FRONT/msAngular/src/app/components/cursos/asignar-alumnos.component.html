@@ -17,6 +17,7 @@ a buscar el curso al back, por eso si el curso ya está, recien ahi carga la pla
 
     <mat-tab-group animationDuration="2000ms" dynamicHeight [(selectedIndex)]="tabIndex">
       <mat-tab label="Asignar Alumnos">
+        
         <mat-form-field class="mx-3" style="width:50%;">
           <input matInput placeholder="Buscar Alumnos" (keyup)="filtrar($any($event.target).value)">
         </mat-form-field>
@@ -60,10 +61,11 @@ a buscar el curso al back, por eso si el curso ya está, recien ahi carga la pla
           [disabled]="!seleccion.hasValue()">Asignar</button>
 
       </mat-tab>
-
+   
+ 
 
       <mat-tab label="Alumnos">  
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3" style="width: 75%;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-3" style="width: 75%;">
           <!-- En angular material en table esta este metodo tal cual ademas de seleccion: SelectionModel<Alumno>= new SelectionModel<Alumno>(true, []);
   que es el metodo en la clase ts. Y tb los metodos que implementamos en la clase ts-->
          
@@ -92,7 +94,7 @@ a buscar el curso al back, por eso si el curso ya está, recien ahi carga la pla
             <th mat-header-cell *matHeaderCellDef> Eliminar </th>
             <td mat-cell *matCellDef="let alumno"> 
               <button mat-flat-button color="warn"
-              (click)="eliminarAlumno(alumno)">X</button> 
+              (click)="eliminarAlumno(alumno)">Eliminar</button> 
             </td>
           </ng-container> 
 
@@ -108,6 +110,10 @@ a buscar el curso al back, por eso si el curso ya está, recien ahi carga la pla
         class="float-left mx-2">
         <!-- showFirstLastButtons: es para mostrar ir a la primera y a la ultima pagina -->
       </mat-paginator>
-      </mat-tab>
-    </mat-tab-group>
- c
+    </mat-tab>
+
+
+  </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+ 

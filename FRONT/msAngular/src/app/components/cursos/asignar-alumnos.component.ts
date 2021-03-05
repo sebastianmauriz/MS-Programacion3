@@ -44,7 +44,7 @@ export class AsignarAlumnosComponent implements OnInit {
       //ahora buscamos el curso al back
       this.cursoService.ver(id).subscribe(c => {
         this.curso=c;
-        this.alumnos = this.curso.alumnos
+        this.alumnos = this.curso.alumnos;
         this.iniciarPaginador();
       }); //lo que hacemos en el suscribe es que 
       //emitimos un curso (c) y a cada curso de ese emitido se lo asignamos al curso (curso)(this.curso=c)
@@ -54,7 +54,7 @@ export class AsignarAlumnosComponent implements OnInit {
    
   }
 
-  iniciarPaginador():void{
+  private iniciarPaginador():void{
     this.dataSource= new MatTableDataSource<Alumno>(this.alumnos);
     //asignamos al dataSource el paginador que viene de la vista
     this.dataSource.paginator= this.paginator;
@@ -130,8 +130,8 @@ export class AsignarAlumnosComponent implements OnInit {
         } //ya que de tomas maneras no lo va a poder cargar a otro curso porque el backend no se lo
         //permite 
       }
-    }
-    );
+    
+    });
 
   }
 
