@@ -28,6 +28,7 @@ export class AsignarExamenesComponent implements OnInit {
   mostrarColumnasExamenes = ['id', 'nombre', 'asignaturas', 'eliminar'];
   tabIndex: number = 0;
   dataSource!: MatTableDataSource<Examen>;
+  //el ViewChild es para poder exportar el paginador de la vista al componente
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   pageSizeOptions = [3, 5, 10, 20, 50];
 

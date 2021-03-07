@@ -39,4 +39,8 @@ eliminarExamen(curso: Curso, examen: Examen): Observable<Curso>{
   examen, {headers: this.cabeceras});
 }
 
+obtenerCursoPorAlumnoId(alumno: Alumno): Observable<Curso>{
+  return this.http.get<Curso>(`${this.baseEndpoint}/alumno/${alumno.id}`);
+}
+
 }

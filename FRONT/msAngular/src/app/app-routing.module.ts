@@ -8,6 +8,7 @@ import { CursoFormComponent } from './components/cursos/curso-form.component';
 import { CursosComponent } from './components/cursos/cursos.component';
 import { ExamenFormComponent } from './components/examenes/examen-form.component';
 import { ExamenesComponent } from './components/examenes/examenes.component';
+import { ResponderExamenComponent } from './components/examenes/responder-examen.component';
 
 const routes: Routes = [
   {path: '', pathMatch:'full', redirectTo:'cursos'}, //esto es para que al cargar la ruta inicial
@@ -22,7 +23,9 @@ const routes: Routes = [
   {path: 'examenes/form', component:ExamenFormComponent },
   {path: 'examenes/form/:id', component:ExamenFormComponent },
   {path: 'cursos/asignar-alumnos/:id', component: AsignarAlumnosComponent},
-  {path: 'cursos/asignar-examenes/:id', component: AsignarExamenesComponent}
+  {path: 'cursos/asignar-examenes/:id', component: AsignarExamenesComponent},
+  {path: 'alumnos/responder-examen/:id', component: ResponderExamenComponent},
+
 ];
 
 @NgModule({

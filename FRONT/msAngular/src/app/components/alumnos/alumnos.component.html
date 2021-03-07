@@ -15,6 +15,7 @@
                     <th>apellido</th>
                     <th>email</th>
                     <th>creado en</th>
+                    <th>examenes</th>
                     <th>editar</th>
                     <th>eliminar</th>
                 </tr>
@@ -40,6 +41,8 @@
                     <td>{{alumno.apellido}}</td>
                     <td>{{alumno.email}}</td>
                     <td>{{alumno.creatAt | date:'yyyy/MM/dd'}}</td>
+                    <td><button class="btn btn-primary btn-sm"
+                        [routerLink]="['/alumnos/responder-examen', alumno.id]">responder</button></td>
                     <td><button class="btn btn-secondary btn-sm" 
                         [routerLink]="['/alumnos/form', alumno.id]">
                         Editar</button></td>
