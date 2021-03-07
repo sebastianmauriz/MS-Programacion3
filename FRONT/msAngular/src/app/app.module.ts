@@ -27,6 +27,7 @@ import { AsignarExamenesComponent } from './components/cursos/asignar-examenes.c
 import { ResponderExamenComponent } from './components/examenes/responder-examen.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal.component';
+import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal.component';
 
 
 
@@ -43,8 +44,12 @@ import { ResponderExamenModalComponent } from './components/alumnos/responder-ex
     AsignarExamenesComponent,
     ResponderExamenComponent,
     ResponderExamenModalComponent,
+    VerExamenModalComponent,
   ],
-  entryComponents:[ResponderExamenModalComponent],
+  entryComponents:[
+    ResponderExamenModalComponent,
+    VerExamenModalComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

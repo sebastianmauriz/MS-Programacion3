@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Curso {{curso.nombre}}</h1>
+<div mat-dialog-content>
+    <p>Examen {{examen.nombre}}</p>
+
+    <mat-expansion-panel *ngFor=" let respuesta of respuestas">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{respuesta.pregunta.texto}}
+          </mat-panel-title>
+          <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+            
+        <p> {{respuesta.texto}} </p>
+      </mat-expansion-panel>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cerrar()">Cerrar</button>
+
+</div>
+
