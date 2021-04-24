@@ -42,12 +42,11 @@
                     <td>{{alumno.email}}</td>
                     <td>{{alumno.creatAt | date:'yyyy/MM/dd'}}</td>
                     <td><button class="btn btn-primary btn-sm"
-                        [routerLink]="['/alumnos/responder-examen', alumno.id]">responder</button></td>
+                        [routerLink]="['/alumnos/responder-examen', alumno.id]">Responder</button></td>
                     <td><button class="btn btn-secondary btn-sm" 
                         [routerLink]="['/alumnos/form', alumno.id]">
                         Editar</button></td>
-                    <td><button class="btn btn-danger btn-sm" (click)="eliminar(alumno)"
-                        >
+                    <td><button class="btn btn-danger btn-sm" (click)="eliminar(alumno)" >
                         Eliminar</button></td>
 
 

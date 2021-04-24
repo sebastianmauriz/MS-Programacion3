@@ -29,6 +29,7 @@ export class ExamenFormComponent extends CommonFormComponent<Examen, ExamenServi
   }
 
   ngOnInit(): void {
+    
 
     //verificamos que el id exista
     //cmoo en angular todo es reactivo debemos suscibirnos y en el caso de que cambie la ruta con

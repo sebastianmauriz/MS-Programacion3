@@ -24,7 +24,7 @@ export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoServ
     this.nombreModel = Alumno.name;
   }
 
-  public seleccionarFoto(event: any): void {
+  public seleccionarFoto(event:any): void {
     this.fotoSeleccionada = event.target.files[0]; //se pone asi (files[0]) porque es 1 sola foto
     console.info(this.fotoSeleccionada);
     //ahora validamos que lo que suba el usuario sea una foto y no un pdf o un ecxel o cualquier cosa
@@ -39,8 +39,8 @@ export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoServ
 
   public crear(): void {
 
-    if (this.fotoSeleccionada == null) { //en el caso de que sea sin foto
-      super.crear; //invoca el metodo crear del padre
+    if (!this.fotoSeleccionada ) { //en el caso de que sea sin foto
+      super.crear(); //invoca el metodo crear del padre
     } else { //si viene con foto, crea el nuevo objeto
       this.service.crearConFoto(this.model, this.fotoSeleccionada).subscribe(alumno => {
         console.log(alumno);
@@ -54,12 +54,13 @@ export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoServ
         }
       });
     }
+    
   }
 
   public editar(): void {
 
     if (this.fotoSeleccionada == null) { //en el caso de que sea sin foto
-      super.editar; //invoca el metodo editar del padre
+      super.editar(); //invoca el metodo editar del padre
     } else { //si viene con foto, edita el nuevo objeto
       this.service.editarConFoto(this.model, this.fotoSeleccionada).subscribe(alumno => {
         console.log(alumno);
@@ -74,6 +75,7 @@ export class AlumnosFormComponent extends CommonFormComponent<Alumno, AlumnoServ
       });
     }
   }
+  
 
   
 }

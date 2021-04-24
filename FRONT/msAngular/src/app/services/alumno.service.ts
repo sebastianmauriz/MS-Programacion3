@@ -33,6 +33,7 @@ export class AlumnoService extends CommonService<Alumno>{
     return this.http.post<Alumno>(this.baseEndpoint + '/crear-con-foto', formData);
   }
 
+  
   public editarConFoto(alumno: Alumno, archivo:File): Observable<Alumno>{
     const formData = new FormData(); //este es como el MultiPartFile de spring
     formData.append('archivo', archivo);//append recibe llave y valor: la llave es la misma que en el back
